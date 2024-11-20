@@ -537,7 +537,7 @@ func (bigtable *Bigtable) SaveValidatorBalances(epoch uint64, validators []*type
 	defer cancel()
 
 	// start := time.Now()
-	ts := gcp_bigtable.Timestamp(0)
+	ts := gcp_bigtable.Time(utils.EpochToTime(epoch))
 
 	muts := types.NewBulkMutations(len(validators))
 
@@ -2250,7 +2250,7 @@ func (bigtable *Bigtable) GetValidatorBalanceStatistics(validators []uint64, sta
 func (bigtable *Bigtable) SaveValidatorIncomeDetails(epoch uint64, rewards map[uint64]*itypes.ValidatorEpochIncome) error {
 
 	start := time.Now()
-	ts := gcp_bigtable.Timestamp(utils.EpochToTime(epoch).UnixMicro())
+	ts := gcp_bigtable.Time(utils.EpochToTime(epoch))
 
 	total := &itypes.ValidatorEpochIncome{}
 
